@@ -40,16 +40,16 @@ class SplashScreen extends Component {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#373737',
+          backgroundColor: '#ff9ff1',
         }}>
         <Image
           style={{
             width: 300,
-            height: 52,
+            height: 300,
             // borderRadius: 25,
             // resizeMode: 'contain',
           }}
-          source={require('../images/logo-light.png')}
+          source={require('../images/logo-griya.png')}
         />
         {/* <Text style={{fontSize: 68, color: '#ffffff', fontWeight: 'bold'}}>
           SIDAR

@@ -299,7 +299,7 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#2b2b2b'}}>
+      <View style={{flex: 1, backgroundColor: '#ff9ff1'}}>
         {this.state.status_loading == true ? (
           <View
             style={{
@@ -318,10 +318,7 @@ class Login extends Component {
           </View>
         ) : (
           <View>
-            <SignInHeader
-              title="SIDAR"
-              description="System Information Daily Activity Report"
-            />
+            <SignInHeader title="Griya Psikologi" description="" />
             <TextInput
               onChangeText={text => this.setState({username: text})}
               style={{
@@ -370,7 +367,7 @@ class Login extends Component {
             <TouchableOpacity
               style={{
                 marginTop: 40,
-                backgroundColor: '#797979',
+                backgroundColor: '#6d0e5a',
                 paddingVertical: 15,
                 marginHorizontal: 20,
                 justifyContent: 'center',

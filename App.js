@@ -143,7 +143,7 @@ function HomeScreen() {
               }}>
               <View
                 style={{
-                  backgroundColor: '#898989',
+                  backgroundColor: '#6d0e5a',
                   height: 140,
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -224,7 +224,7 @@ function HomeScreen() {
               }}>
               <View
                 style={{
-                  backgroundColor: '#898989',
+                  backgroundColor: '#6d0e5a',
                   height: 140,
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -267,7 +267,7 @@ function HomeScreen() {
               }}>
               <View
                 style={{
-                  backgroundColor: '#898989',
+                  backgroundColor: '#6d0e5a',
                   height: 140,
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -313,7 +313,7 @@ function HomeScreen() {
               }}>
               <View
                 style={{
-                  backgroundColor: '#898989',
+                  backgroundColor: '#6d0e5a',
                   height: 140,
                   alignItems: 'center',
                   justifyContent: 'center',

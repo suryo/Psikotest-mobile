@@ -256,7 +256,7 @@ class Home extends Component {
               style={{
                 marginTop: 30,
                 padding: 10,
-                backgroundColor: '#fffff2',
+                backgroundColor: '#ffe7fa',
                 display: 'flex',
                 flexDirection: 'row',
                 paddingVertical: 10,
@@ -270,12 +270,12 @@ class Home extends Component {
                   padding: 1,
                 }}
                 onPress={() => this.props.navigation.toggleDrawer()}>
-                <Icon name="bars" size={30} color="#797979" />
+                <Icon name="bars" size={30} color="#5b0b4b" />
               </TouchableOpacity>
 
               <Text
                 style={{
-                  color: '#212121',
+                  color: '#5b0b4b',
                   fontSize: 12,
                   marginLeft: 20,
                   marginTop: 5,
@@ -291,121 +291,17 @@ class Home extends Component {
               {/* </TouchableOpacity> */}
             </View>
 
-            <View
-              style={{
-                marginTop: 5,
-                padding: 10,
-                backgroundColor: '#f9ffff',
-                display: 'flex',
-                flexDirection: 'row',
-                paddingVertical: 10,
-                borderTopRightRadius: 12,
-                borderTopLeftRadius: 12,
-                borderBottomRightRadius: 12,
-                borderBottomLeftRadius: 12,
-              }}>
-              {this.state.statusabsenmasuk == 0 ? (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: '#84b291',
-                    width: '50%',
-                    borderRadius: 5,
-                    padding: 1,
-                  }}
-                  // onPress={() => this.props.navigation.navigate('Maps')}>
-                  // onPress={() => this.props.navigation.navigate('AbsenceMasuk')}
-                  onPress={() =>
-                    this.props.navigation.navigate('AbsenceMasuk')
-                  }>
-                  <Text
-                    style={{
-                      color: '#FFFFFF',
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      textAlign: 'center',
-                    }}>
-                    Masuk
-                  </Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: '#84b291',
-                    width: '50%',
-                    borderRadius: 5,
-                    padding: 1,
-                  }}
-                  // onPress={() => this.props.navigation.navigate('Maps')}>
-                  // onPress={() => this.props.navigation.navigate('AbsenceMasuk')}
-                >
-                  <Text
-                    style={{
-                      color: '#FFFFFF',
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      textAlign: 'center',
-                    }}>
-                    Anda Sudah Absen Masuk
-                  </Text>
-                </TouchableOpacity>
-              )}
-
-              {this.state.statusabsenkeluar == 0 ? (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: '#b28484',
-                    width: '50%',
-                    borderRadius: 5,
-                    padding: 1,
-                  }}
-                  // onPress={() => this.props.navigation.navigate('Maps')}>
-                  onPress={() =>
-                    this.props.navigation.navigate('AbsenceKeluar')
-                  }>
-                  <Text
-                    style={{
-                      color: '#FFFFFF',
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      textAlign: 'center',
-                    }}>
-                    Absen Pulang
-                  </Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: '#b28484',
-                    width: '50%',
-                    borderRadius: 5,
-                    padding: 1,
-                  }}
-                  // onPress={() => this.props.navigation.navigate('Maps')}>
-                >
-                  <Text
-                    style={{
-                      color: '#FFFFFF',
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      textAlign: 'center',
-                    }}>
-                    Anda Sudah Absen Pulang
-                  </Text>
-                </TouchableOpacity>
-              )}
-            </View>
-
             <ScrollView>
               <View style={{marginTop: 10, marginBottom: 5}}>
                 <Text
                   style={{
                     fontSize: 18,
                     fontWeight: 'bold',
-                    color: 'grey',
+                    color: '#5b0b4b',
                     textAlign: 'left',
                     padding: 5,
                   }}>
-                  Laporan Hari Ini
+                  Status Test
                 </Text>
               </View>
               <View
@@ -459,7 +355,7 @@ class Home extends Component {
                       borderRadius: 16,
                     },
                   }}
-                  backgroundColor="#797979"
+                  backgroundColor="#5b0b4b"
                   accessor="population"
                   paddingLeft="15"
                   absolute
@@ -485,7 +381,7 @@ class Home extends Component {
                 style={{
                   alignItems: 'center',
                 }}>
-                {/* <BarChart
+                <BarChart
                   data={{
                     labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'],
                     datasets: [
@@ -519,7 +415,7 @@ class Home extends Component {
                     marginVertical: 8,
                     borderRadius: 16,
                   }}
-                /> */}
+                />
               </View>
               <View style={{marginTop: 10, marginBottom: 5}}>
                 {/* <Text
@@ -672,7 +568,7 @@ class Home extends Component {
 
             <View
               style={{
-                backgroundColor: '#898989',
+                backgroundColor: '#6d0e5a',
                 flexDirection: 'row',
                 paddingVertical: 10,
                 borderTopRightRadius: 12,
@@ -697,7 +593,7 @@ class Home extends Component {
                     color: '#ffffff',
                     fontsize: 9,
                   }}>
-                  DAR
+                  TIU
                 </Text>
               </TouchableOpacity>
               {/* Laporan */}
@@ -713,13 +609,13 @@ class Home extends Component {
                     token: this.state.token,
                   })
                 }>
-                <Icon name="chart-bar" size={20} color="#ffffff" />
+                <Icon name="book" size={20} color="#ffffff" />
                 <Text
                   style={{
                     color: '#ffffff',
                     fontsize: 9,
                   }}>
-                  Laporan
+                  PAPI
                 </Text>
               </TouchableOpacity>
               {/* Home */}
@@ -753,13 +649,13 @@ class Home extends Component {
                     token: this.state.token,
                   })
                 }>
-                <Icon name="ban" size={20} color="#ffffff" />
+                <Icon name="book" size={20} color="#ffffff" />
                 <Text
                   style={{
                     color: '#ffffff',
                     fontsize: 9,
                   }}>
-                  Cuti
+                  RIASEC
                 </Text>
               </TouchableOpacity>
 
