@@ -33,7 +33,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const baseUrl = 'http://new.sidar.id';
 // const baseUrl = 'http://localhost/sidar-new';
-class Dar extends Component {
+class Clients extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,7 +86,7 @@ class Dar extends Component {
               marginLeft: 20,
               marginTop: 0,
             }}>
-            Tentang
+            Clients
           </Text>
           {/* </TouchableOpacity> */}
         </View>
@@ -116,18 +116,11 @@ class Dar extends Component {
               style={{
                 color: '#ffffff',
               }}>
-              E-Psikotest Mobile
-              {'\n'}
-              Versi 2.1.0
-              {'\n'}
-              {'\n'}
-              {'\n'}Hubungi kami sekarang juga {'\n'}0812 3441 9532 {'\n'}0896
-              6659 6704 {'\n'}Email : griyapsikologi@uwp.ac.id {'\n'}Griya
-              Psikologi Jl. Raya Benowo 1-3, {'\n'}Surabaya Jawa Jawa Timur
-              Indonesia {'\n'}
-              {'\n'}
-              {'\n'}
-              Copyright @ 2022 Griya Psikologi UWP . All Rights Reserved
+              {'\n'}• PT. Marcapada Sukses Bersama {'\n'}• PT. Vaganza Sumber
+              Sukses {'\n'}• PT. Vaganza Sukses Transportasi {'\n'}• PT. Azka
+              Bersama {'\n'}• Institute Kesehatan dan Bisnis {'\n'}• Stikip BIM
+              {'\n'}• ASMI {'\n'}• SMP Wijaya Putra {'\n'}• SMK Wijaya Putra{' '}
+              {'\n'}• SMA Wijaya Putra {'\n'}• TK Dwi Jaya {'\n'}• TK Mujahidin
             </Text>
           </View>
         </ScrollView>
@@ -264,4 +257,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dar;
+export default Clients;

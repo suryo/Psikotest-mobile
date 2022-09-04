@@ -40,7 +40,7 @@ class SplashScreen extends Component {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#ff9ff1',
+          backgroundColor: '#7030a0',
         }}>
         <Image
           style={{

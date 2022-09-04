@@ -30,6 +30,12 @@ import DetailLaporanDar from './src/screens/DetailLaporanDar';
 import Detail from './src/screens/Detail';
 
 import Tentang from './src/screens/Tentang';
+import Profilanggota from './src/screens/Profilanggota';
+import Visimisi from './src/screens/Visimisi';
+import Keunggulan from './src/screens/Keunggulan';
+import Layanan from './src/screens/Layanan';
+import Clients from './src/screens/Clients';
+
 import Bantuan from './src/screens/Bantuan';
 import KritikSaran from './src/screens/KritikSaran';
 
@@ -159,6 +165,42 @@ function HomeScreen() {
                 onPress={() => props.navigation.navigate('DrawerTentang')}
               />
               <DrawerItem
+                label="Profil Anggota"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerProfilanggota')}
+              />
+              <DrawerItem
+                label="Visi & Misi"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerVisimisi')}
+              />
+
+              <DrawerItem
+                label="Keunggulan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerKeunggulan')}
+              />
+              <DrawerItem
+                label="Layanan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerLayanan')}
+              />
+              <DrawerItem
+                label="Clients"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerClients')}
+              />
+              {/* <DrawerItem
                 label="Bantuan"
                 labelStyle={{
                   color: '#393939',
@@ -171,7 +213,7 @@ function HomeScreen() {
                   color: '#393939',
                 }}
                 onPress={() => props.navigation.navigate('DrawerKritikSaran')}
-              />
+              /> */}
             </DrawerContentScrollView>
           );
         }
@@ -184,6 +226,16 @@ function HomeScreen() {
               style={{
                 backgroundColor: '#fffff2',
               }}>
+              <View
+                style={{
+                  backgroundColor: '#6d0e5a',
+                  height: 140,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Icon name="book" size={20} color="white" />
+                <Text style={{color: 'white', fontSize: 20}}>MENU</Text>
+              </View>
               <DrawerItem
                 labelStyle={{
                   color: '#393939',
@@ -192,23 +244,40 @@ function HomeScreen() {
                 onPress={() => props.navigation.navigate('DrawerTentang')}
               />
               <DrawerItem
-                label="Bantuan"
+                label="Profil Anggota"
                 labelStyle={{
                   color: '#393939',
                 }}
-                onPress={() => props.navigation.navigate('DrawerBantuan')}
+                onPress={() => props.navigation.navigate('DrawerProfilanggota')}
               />
               <DrawerItem
-                label="Kritik & Saran"
+                label="Visi & Misi"
                 labelStyle={{
                   color: '#393939',
                 }}
-                onPress={() => props.navigation.navigate('DrawerKritikSaran')}
+                onPress={() => props.navigation.navigate('DrawerVisimisi')}
               />
 
               <DrawerItem
-                label="Toggle drawer"
-                onPress={() => props.navigation.toggleDrawer()}
+                label="Keunggulan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerKeunggulan')}
+              />
+              <DrawerItem
+                label="Layanan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerLayanan')}
+              />
+              <DrawerItem
+                label="Clients"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerClients')}
               />
             </DrawerContentScrollView>
           );
@@ -230,7 +299,7 @@ function HomeScreen() {
                   justifyContent: 'center',
                 }}>
                 <Icon name="book" size={20} color="white" />
-                <Text style={{color: 'white', fontSize: 20}}>DAR</Text>
+                <Text style={{color: 'white', fontSize: 20}}>MENU</Text>
               </View>
               <DrawerItem
                 labelStyle={{
@@ -240,18 +309,40 @@ function HomeScreen() {
                 onPress={() => props.navigation.navigate('DrawerTentang')}
               />
               <DrawerItem
+                label="Profil Anggota"
                 labelStyle={{
                   color: '#393939',
                 }}
-                label="Bantuan"
-                onPress={() => props.navigation.navigate('DrawerBantuan')}
+                onPress={() => props.navigation.navigate('DrawerProfilanggota')}
               />
               <DrawerItem
+                label="Visi & Misi"
                 labelStyle={{
                   color: '#393939',
                 }}
-                label="Kritik & Saran"
-                onPress={() => props.navigation.navigate('DrawerKritikSaran')}
+                onPress={() => props.navigation.navigate('DrawerVisimisi')}
+              />
+
+              <DrawerItem
+                label="Keunggulan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerKeunggulan')}
+              />
+              <DrawerItem
+                label="Layanan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerLayanan')}
+              />
+              <DrawerItem
+                label="Clients"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerClients')}
               />
             </DrawerContentScrollView>
           );
@@ -273,33 +364,50 @@ function HomeScreen() {
                   justifyContent: 'center',
                 }}>
                 <Icon name="chart-bar" size={20} color="white" />
-                <Text style={{color: 'white', fontSize: 20}}>FILTER</Text>
+                <Text style={{color: 'white', fontSize: 20}}>MENU</Text>
               </View>
-
               <DrawerItem
-                label="Filter By Date"
-                onPress={() =>
-                  props.navigation.navigate('DrawerLaporanDar', {
-                    parameter: 'FilterDate',
-                  })
-                }
+                label="Tentang"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerTentang')}
               />
               <DrawerItem
-                label="Filter By Time"
-                onPress={() =>
-                  props.navigation.navigate('DrawerLaporanDar', {
-                    parameter: 'FilterTime',
-                  })
-                }
+                label="Profil Anggota"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerProfilanggota')}
+              />
+              <DrawerItem
+                label="Visi & Misi"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerVisimisi')}
               />
 
               <DrawerItem
-                label="Filter By Name"
-                onPress={() =>
-                  props.navigation.navigate('DrawerLaporanDar', {
-                    parameter: 'FilterName',
-                  })
-                }
+                label="Keunggulan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerKeunggulan')}
+              />
+              <DrawerItem
+                label="Layanan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerLayanan')}
+              />
+              <DrawerItem
+                label="Clients"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerClients')}
               />
             </DrawerContentScrollView>
           );
@@ -319,7 +427,7 @@ function HomeScreen() {
                   justifyContent: 'center',
                 }}>
                 <Icon name="cogs" size={20} color="white" />
-                <Text style={{color: 'white', fontSize: 20}}>FILTER</Text>
+                <Text style={{color: 'white', fontSize: 20}}>MENU</Text>
               </View>
               <DrawerItem
                 label="Tentang"
@@ -329,18 +437,40 @@ function HomeScreen() {
                 onPress={() => props.navigation.navigate('DrawerTentang')}
               />
               <DrawerItem
-                label="Bantuan"
+                label="Profil Anggota"
                 labelStyle={{
                   color: '#393939',
                 }}
-                onPress={() => props.navigation.navigate('DrawerBantuan')}
+                onPress={() => props.navigation.navigate('DrawerProfilanggota')}
               />
               <DrawerItem
-                label="Kritik & Saran"
+                label="Visi & Misi"
                 labelStyle={{
                   color: '#393939',
                 }}
-                onPress={() => props.navigation.navigate('DrawerKritikSaran')}
+                onPress={() => props.navigation.navigate('DrawerVisimisi')}
+              />
+
+              <DrawerItem
+                label="Keunggulan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerKeunggulan')}
+              />
+              <DrawerItem
+                label="Layanan"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerLayanan')}
+              />
+              <DrawerItem
+                label="Clients"
+                labelStyle={{
+                  color: '#393939',
+                }}
+                onPress={() => props.navigation.navigate('DrawerClients')}
               />
             </DrawerContentScrollView>
           );
@@ -355,6 +485,31 @@ function HomeScreen() {
         name="DrawerTentang"
         options={{drawerLabel: 'Second Page Option'}}
         component={Tentang}
+      />
+      <Drawer.Screen
+        name="DrawerProfilanggota"
+        options={{drawerLabel: 'Second Page Option'}}
+        component={Profilanggota}
+      />
+      <Drawer.Screen
+        name="DrawerVisimisi"
+        options={{drawerLabel: 'Second Page Option'}}
+        component={Visimisi}
+      />
+      <Drawer.Screen
+        name="DrawerKeunggulan"
+        options={{drawerLabel: 'Second Page Option'}}
+        component={Keunggulan}
+      />
+      <Drawer.Screen
+        name="DrawerLayanan"
+        options={{drawerLabel: 'Second Page Option'}}
+        component={Layanan}
+      />
+      <Drawer.Screen
+        name="DrawerClients"
+        options={{drawerLabel: 'Second Page Option'}}
+        component={Clients}
       />
       <Drawer.Screen
         name="DrawerBantuan"

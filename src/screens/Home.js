@@ -22,6 +22,7 @@ import {
   Dimensions,
   ScrollView,
   Alert,
+  Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
@@ -34,7 +35,7 @@ import {
 } from 'react-native-chart-kit';
 import axios from 'axios';
 import MenuDrawer from 'react-native-side-drawer';
-const baseUrl = 'http://new.sidar.id';
+const baseUrl = 'http://tes.psikologiuwp.com';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // const baseUrl = 'http://localhost/sidar-new';
@@ -256,13 +257,13 @@ class Home extends Component {
               style={{
                 marginTop: 30,
                 padding: 10,
-                backgroundColor: '#ffe7fa',
+                backgroundColor: '#5b0b4b',
                 display: 'flex',
                 flexDirection: 'row',
                 paddingVertical: 10,
 
-                borderBottomRightRadius: 12,
-                borderBottomLeftRadius: 12,
+                // borderBottomRightRadius: 12,
+                // borderBottomLeftRadius: 12,
               }}>
               <TouchableOpacity
                 style={{
@@ -270,12 +271,12 @@ class Home extends Component {
                   padding: 1,
                 }}
                 onPress={() => this.props.navigation.toggleDrawer()}>
-                <Icon name="bars" size={30} color="#5b0b4b" />
+                <Icon name="bars" size={30} color="#ffe7fa" />
               </TouchableOpacity>
 
               <Text
                 style={{
-                  color: '#5b0b4b',
+                  color: '#ffe7fa',
                   fontSize: 12,
                   marginLeft: 20,
                   marginTop: 5,
@@ -284,8 +285,8 @@ class Home extends Component {
                 {/* - {this.state.iduser} */}
                 {'\n'}Anda terakhir login pada,{' '}
                 {this.state.datalogin.last_login}
-                {'\n'}status absen masuk, {this.state.statusabsenmasuk}
-                {'\n'}status absen keluar, {this.state.statusabsenkeluar}
+                {/* {'\n'}status Tes masuk, {this.state.statusabsenmasuk}
+                {'\n'}status Tes keluar, {this.state.statusabsenkeluar} */}
                 {/* token, {this.state.token} */}
               </Text>
               {/* </TouchableOpacity> */}
@@ -293,22 +294,61 @@ class Home extends Component {
 
             <ScrollView>
               <View style={{marginTop: 10, marginBottom: 5}}>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Image
+                    style={{
+                      width: 200,
+                      height: 200,
+                      // resizeMode: 'cover',
+                    }}
+                    source={require('../images/logo-griya.png')}
+                  />
+                </View>
                 <Text
                   style={{
-                    fontSize: 18,
+                    fontSize: 20,
                     fontWeight: 'bold',
+                    color: '#5b0b4b',
+                    textAlign: 'center',
+                    padding: 5,
+                  }}>
+                  GRIYA PSIKOLOGI {'\n'} Psichological & Counseling Center
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 14,
+                    // fontWeight: 'bold',
+                    color: '#5b0b4b',
+                    textAlign: 'justify',
+                    padding: 5,
+                  }}>
+                  Griya Psikologi adalah sebuah lembaga yang bergerak dibidang
+                  pelayanan jasa psikologi dibawah naungan Universitas Wijaya
+                  Putra.Berdiri sejak tahun 2015, Bertujuan memberikan pelayanan
+                  pada masyarakat luas, tentang hal-hal yang berkaitan dengan
+                  persoalan-persoalan psikologis. concern kami adalah
+                  Pendidikan, Industri & Organisasi, Klinis dan Sosial
+                  Kemasyarakatan. Kami memberikan Layan psikologi dan intervensi
+                  psikologi dalam berbagai lingkup kebutuhan, seperti
+                  pengembangan diri, sekolah, keluarga, perusahaan swasta maupun
+                  BUMN
+                </Text>
+                {/* <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold', 
                     color: '#5b0b4b',
                     textAlign: 'left',
                     padding: 5,
                   }}>
                   Status Test
-                </Text>
+                </Text> */}
               </View>
               <View
                 style={{
                   alignItems: 'center',
                 }}>
-                <PieChart
+                {/* <PieChart
                   data={[
                     {
                       name: this.state.labelku,
@@ -363,7 +403,7 @@ class Home extends Component {
                     marginVertical: 8,
                     borderRadius: 16,
                   }}
-                />
+                /> */}
               </View>
               <View style={{marginTop: 10, marginBottom: 5}}>
                 {/* <Text
@@ -381,7 +421,7 @@ class Home extends Component {
                 style={{
                   alignItems: 'center',
                 }}>
-                <BarChart
+                {/* <BarChart
                   data={{
                     labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'],
                     datasets: [
@@ -415,7 +455,7 @@ class Home extends Component {
                     marginVertical: 8,
                     borderRadius: 16,
                   }}
-                />
+                /> */}
               </View>
               <View style={{marginTop: 10, marginBottom: 5}}>
                 {/* <Text
@@ -574,6 +614,23 @@ class Home extends Component {
                 borderTopRightRadius: 12,
                 borderTopLeftRadius: 12,
               }}>
+              {/* Home */}
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+                onPress={() => this.props.navigation.navigate('DrawerHome')}>
+                <Icon name="home" size={25} color="#ffffff" />
+                <Text
+                  style={{
+                    color: '#ffffff',
+                    fontsize: 9,
+                  }}>
+                  Home
+                </Text>
+              </TouchableOpacity>
               {/* DAR */}
               <TouchableOpacity
                 style={{
@@ -616,23 +673,6 @@ class Home extends Component {
                     fontsize: 9,
                   }}>
                   PAPI
-                </Text>
-              </TouchableOpacity>
-              {/* Home */}
-              <TouchableOpacity
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                onPress={() => this.props.navigation.navigate('DrawerHome')}>
-                <Icon name="home" size={25} color="#ffffff" />
-                <Text
-                  style={{
-                    color: '#ffffff',
-                    fontsize: 9,
-                  }}>
-                  Home
                 </Text>
               </TouchableOpacity>
 
@@ -690,7 +730,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // padding: 8,
     // paddingTop: 30,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#fff8fe',
   },
   sidebar: {
     flex: 1,

@@ -33,7 +33,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const baseUrl = 'http://new.sidar.id';
 // const baseUrl = 'http://localhost/sidar-new';
-class Dar extends Component {
+class Keunggulan extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,7 +86,7 @@ class Dar extends Component {
               marginLeft: 20,
               marginTop: 0,
             }}>
-            Tentang
+            Keunggulan
           </Text>
           {/* </TouchableOpacity> */}
         </View>
@@ -116,15 +116,20 @@ class Dar extends Component {
               style={{
                 color: '#ffffff',
               }}>
-              E-Psikotest Mobile
               {'\n'}
-              Versi 2.1.0
+              Melakukan Assesment Organisasi, Kelompok dan Individu yang
+              dikerjakan oleh para profesional {'\n'}
+              {'\n'}Menawarkan Harga Yang kompetitif {'\n'}
+              {'\n'}Laporan melalui Quality Control sehingga memiliki kualitas
+              yang terjaga {'\n'}
+              {'\n'}Alat tes seuai dengan standar HIMPSI (Himpunan Psikologi
+              Indonesia) {'\n'}
+              {'\n'}Melayani Pelaksanaan Psikotes di kantor / tempat klien
+              (dengan syarat dan ketentuan berlaku) dan Memberikan layanan
+              Training dengan tema yang disesuaikan dengan kebutuhan klien.{' '}
               {'\n'}
-              {'\n'}
-              {'\n'}Hubungi kami sekarang juga {'\n'}0812 3441 9532 {'\n'}0896
-              6659 6704 {'\n'}Email : griyapsikologi@uwp.ac.id {'\n'}Griya
-              Psikologi Jl. Raya Benowo 1-3, {'\n'}Surabaya Jawa Jawa Timur
-              Indonesia {'\n'}
+              {'\n'}Bentuk Laporan bisa didesain sesuai standar dari organisasi,
+              baik perusahaan maupun sekolah.
               {'\n'}
               {'\n'}
               Copyright @ 2022 Griya Psikologi UWP . All Rights Reserved
@@ -264,4 +269,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dar;
+export default Keunggulan;

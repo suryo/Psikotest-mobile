@@ -33,7 +33,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const baseUrl = 'http://new.sidar.id';
 // const baseUrl = 'http://localhost/sidar-new';
-class Dar extends Component {
+class Visimisi extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,7 +86,7 @@ class Dar extends Component {
               marginLeft: 20,
               marginTop: 0,
             }}>
-            Tentang
+            Visi & Misi
           </Text>
           {/* </TouchableOpacity> */}
         </View>
@@ -116,15 +116,20 @@ class Dar extends Component {
               style={{
                 color: '#ffffff',
               }}>
-              E-Psikotest Mobile
               {'\n'}
-              Versi 2.1.0
+              VISI
+              {'\n'}
+              Menjadi pusat layanan psikologi yang profesional dalam memberikan
+              pelayanan jasa praktik dan konsultasi psikologi.
               {'\n'}
               {'\n'}
-              {'\n'}Hubungi kami sekarang juga {'\n'}0812 3441 9532 {'\n'}0896
-              6659 6704 {'\n'}Email : griyapsikologi@uwp.ac.id {'\n'}Griya
-              Psikologi Jl. Raya Benowo 1-3, {'\n'}Surabaya Jawa Jawa Timur
-              Indonesia {'\n'}
+              {'\n'}
+              MISI
+              {'\n'}1. Menyediakan pelayanan jasa praktik dan konsultasi
+              psikologi yang profesional.{'\n'}2. Menyediakan pelayanan jasa dan
+              praktik psikologi dalam berbagai setting kehidupan.{'\n'}3.
+              Memberikan pelayanan jasa praktik dan konsultasi psikologi sesuai
+              dengan kebutuhan klien.
               {'\n'}
               {'\n'}
               Copyright @ 2022 Griya Psikologi UWP . All Rights Reserved
@@ -264,4 +269,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dar;
+export default Visimisi;

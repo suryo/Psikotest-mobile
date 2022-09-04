@@ -33,7 +33,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const baseUrl = 'http://new.sidar.id';
 // const baseUrl = 'http://localhost/sidar-new';
-class Dar extends Component {
+class Layanan extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,7 +86,7 @@ class Dar extends Component {
               marginLeft: 20,
               marginTop: 0,
             }}>
-            Tentang
+            Layanan
           </Text>
           {/* </TouchableOpacity> */}
         </View>
@@ -115,19 +115,100 @@ class Dar extends Component {
             <Text
               style={{
                 color: '#ffffff',
+                textAlign: 'justify',
               }}>
-              E-Psikotest Mobile
+              A. Layanan Psikotes Bidang Industri dan Organisasi
               {'\n'}
-              Versi 2.1.0
+              {'\n'}Tujuan : {'\n'}Memperoleh gambaran secara konkrit tentang
+              kualitas dan performa kerja serta loyalitas karyawan; dapat
+              menempatkan SDM pada posisi pekerjaan yang sesuai dengan
+              kompetensi serta minat yang dimiliki, sehingga dapat memberikan
+              kontribusi besar pada perusahaan.{'\n'}
+              {'\n'}Lingkup layanan : {'\n'}- Pemeriksaan Psikologi untuk
+              seleksi calon karyawan. {'\n'}- Penelusuran potensi psikologi,
+              sumberdaya manusia untuk optimasi penempatan karyawan. {'\n'}-
+              Pemeriksaan psikologi evaluasi dan promosi karyawan ke jenjang
+              yang lebih tinggi.
+            </Text>
+          </View>
+
+          <View
+            style={{
+              backgroundColor: '#7030a0',
+              padding: 25,
+              marginLeft: 5,
+              marginRight: 5,
+              marginBottom: 20,
+            }}>
+            <Text
+              style={{
+                color: '#ffffff',
+                textAlign: 'justify',
+              }}>
+              B. Layanan Psikotes Bidang Pendidikan
               {'\n'}
+              {'\n'} Tujuan : {'\n'}mengetahui kondisi psikologis siswa
+              berkaitan dengan : inteligensi, bakat, minat dan kepribadian
+              sehingga dapat digunakan untuk membantu mengarahkan siswa untuk
+              mengenyam pendidikan sesuai dengan kemampuan yang dimiliki dan
+              sesuai dengan yang diinginkan. {'\n'}
+              {'\n'}Lingkup layanan : {'\n'}- Psikotes berkaitan dengan
+              pendidikan, karir, pemilihan jurusan di perguruan tinggi.
+              {'\n'}- Tes kecerdasan, minat, bakat, dan kepribadian serta
+              analisis potensinya.
+            </Text>
+          </View>
+
+          <View
+            style={{
+              backgroundColor: '#7030a0',
+              padding: 25,
+              marginLeft: 5,
+              marginRight: 5,
+              marginBottom: 20,
+            }}>
+            <Text
+              style={{
+                color: '#ffffff',
+                textAlign: 'justify',
+              }}>
+              C. Layanan Training
               {'\n'}
-              {'\n'}Hubungi kami sekarang juga {'\n'}0812 3441 9532 {'\n'}0896
-              6659 6704 {'\n'}Email : griyapsikologi@uwp.ac.id {'\n'}Griya
-              Psikologi Jl. Raya Benowo 1-3, {'\n'}Surabaya Jawa Jawa Timur
-              Indonesia {'\n'}
+              {'\n'}Tujuan :{'\n'}Memberikan pelatihan guna meningkatkan
+              kemampuan-kemampuan yang diperlukan oleh organisasi baik dalam
+              bidang industri maupun bidang pendidikan yang telah disesuaikan
+              dengan latar belakang permasalahan dan kebutuhan klien. {'\n'}
               {'\n'}
+              Lingkup layanan : {'\n'}Leadership Training, Parenting Training,
+              Team Building Training, Motivation Training
+            </Text>
+          </View>
+
+          <View
+            style={{
+              backgroundColor: '#7030a0',
+              padding: 25,
+              marginLeft: 5,
+              marginRight: 5,
+              marginBottom: 20,
+            }}>
+            <Text
+              style={{
+                color: '#ffffff',
+                textAlign: 'justify',
+              }}>
+              D. Layanan Konseling
               {'\n'}
-              Copyright @ 2022 Griya Psikologi UWP . All Rights Reserved
+              {'\n'}Tujuan :{'\n'}Melakukan intervensi psikologis dengan tujuan
+              agar klien dapat menemukan insight dan kebermaknaan dari setiap
+              solusi permasalahan hidupnya. {'\n'}
+              {'\n'}
+              Lingkup layanan : {'\n'}- Konseling Individu (masalah keluarga,
+              pekerjaan, bebas nilai) {'\n'}- Konseling Perusahaan (Stress
+              Kerja, pengembangan Sumber Daya Manusia {'\n'}- Konseling
+              Perangkat Sekolah / Guru {'\n'}- Konseling Klasikal Siswa:
+              membahas motivasi belajar, penentuan jurusan, serta cara belajar
+              yang sesuai dengan siswa.
             </Text>
           </View>
         </ScrollView>
@@ -264,4 +345,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dar;
+export default Layanan;

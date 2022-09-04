@@ -32,7 +32,7 @@ import {
 import SignInHeader from '../components/SignInHeader';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const baseUrl = 'http://new.sidar.id';
+const baseUrl = 'http://tes.psikologiuwp.com';
 // const baseUrl = 'http://localhost/sidar-new';
 
 class Login extends Component {
@@ -299,7 +299,7 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#ff9ff1'}}>
+      <View style={{flex: 1, backgroundColor: '#fff8fe'}}>
         {this.state.status_loading == true ? (
           <View
             style={{
@@ -328,9 +328,9 @@ class Login extends Component {
                 borderRadius: 9,
                 elevation: 2,
                 paddingLeft: 10,
-                color: '#252525',
+                color: '#6d0e5a',
               }}
-              placeholderTextColor="#292929"
+              placeholderTextColor="#6d0e5a"
               placeholder="Masukkan Username Anda"
             />
             <TextInput
@@ -342,9 +342,9 @@ class Login extends Component {
                 borderRadius: 9,
                 elevation: 2,
                 paddingLeft: 10,
-                color: '#252525',
+                color: '#6d0e5a',
               }}
-              placeholderTextColor="#292929"
+              placeholderTextColor="#6d0e5a"
               placeholder="Masukkan Password Anda"
               secureTextEntry={true}
             />
