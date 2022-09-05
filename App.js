@@ -24,6 +24,7 @@ import AbsenceKeluar from './src/screens/AbsenceKeluar';
 import AbsenceMasuk from './src/screens/AbsenceMasuk';
 
 import Cuti from './src/screens/Cuti';
+import Introtiu from './src/screens/Introtiu';
 import Dar from './src/screens/Dar';
 import LaporanDar from './src/screens/LaporanDar';
 import DetailLaporanDar from './src/screens/DetailLaporanDar';
@@ -526,6 +527,12 @@ function HomeScreen() {
         name="DrawerDar"
         options={{drawerLabel: 'Hidden Page Two option'}}
         component={Dar}
+      />
+
+      <Drawer.Screen
+        name="DrawerIntrotiu"
+        options={{drawerLabel: 'Hidden Page Two option'}}
+        component={Introtiu}
       />
 
       <Drawer.Screen

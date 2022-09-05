@@ -34,7 +34,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectDropdown from 'react-native-select-dropdown';
 import RadioButtonRN from 'radio-buttons-react-native';
 const baseUrl = 'http://tes.psikologiuwp.com';
-
+import CountDown from 'react-native-countdown-component';
 const data1 = [
   {
     label: 'gambar 1',
@@ -765,8 +765,7 @@ class Dar extends Component {
       jwb29: '',
       jwb30: '',
 
-      timer: 480,
-      prevState: 0,
+      timetosave: 0,
     };
   }
 
@@ -802,14 +801,14 @@ class Dar extends Component {
           console.log(responseprofile.data.data.user.id_karyawan);
           console.log(this.state.token);
 
-          if (responseprofile.data.periodetanggaldar.length === 0) {
-            console.log('periode tanggal dar kosong');
-            this.setState({tanggaldar: responseprofile.data.tglhariini});
-          } else {
-            this.setState({
-              tanggaldar: responseprofile.data.periodetanggaldar[0],
-            });
-          }
+          // if (responseprofile.data.periodetanggaldar.length === 0) {
+          //   console.log('periode tanggal dar kosong');
+          //   this.setState({tanggaldar: responseprofile.data.tglhariini});
+          // } else {
+          //   this.setState({
+          //     tanggaldar: responseprofile.data.periodetanggaldar[0],
+          //   });
+          // }
           this.setState({
             status: responseprofile.data.statusdar,
             periodetanggaldar: responseprofile.data.periodetanggaldar,
@@ -823,20 +822,20 @@ class Dar extends Component {
           console.log(iduser);
           console.log(this.state.tanggaldar);
           //ambild data di server bisa dilakukan disini
-          axios({
-            method: 'get',
-            url: `${baseUrl}/api/sidar_dar/detail?option=2&iduser=${iduser}`,
-            headers: {
-              'X-Api-Key': '0ED40DE05125623C8753B6D3196C18DE',
-              'X-Token': this.state.token,
-            },
-          })
-            .then(response => {
-              this.setState({dar: response.data.data.sidar_dar});
-            })
-            .catch(function (err) {
-              console.log(err);
-            });
+          // axios({
+          //   method: 'get',
+          //   url: `${baseUrl}/api/sidar_dar/detail?option=2&iduser=${iduser}`,
+          //   headers: {
+          //     'X-Api-Key': '0ED40DE05125623C8753B6D3196C18DE',
+          //     'X-Token': this.state.token,
+          //   },
+          // })
+          //   .then(response => {
+          //     this.setState({dar: response.data.data.sidar_dar});
+          //   })
+          //   .catch(function (err) {
+          //     console.log(err);
+          //   });
         })
         .catch(function (err) {
           console.log(err);
@@ -844,17 +843,18 @@ class Dar extends Component {
     });
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  componentWillUnmount() {}
 
-  componentDidUpdate() {
-    if (this.state.timer === 1) {
-      clearInterval(this.interval);
-    }
-  }
+  componentDidUpdate() {}
+
+  timetosubmitData = () => {
+    console.log('submit bin simpan');
+    this.setState({timetosave: 1});
+    alert('finished');
+  };
 
   submitData = () => {
+    alert('finished');
     console.log('tombol simpan mengirimkan data');
     console.log('ini jawab');
     console.log(this.state.jwb1);
@@ -915,13 +915,6 @@ class Dar extends Component {
         console.log(err);
         alert('periksa kembali inputan anda');
       });
-  };
-
-  getTimerCountDown = async () => {
-    this.interval = setInterval(
-      () => this.setState(prevState => ({timer: prevState.timer - 1})),
-      1000,
-    );
   };
 
   logout = async () => {
@@ -1000,51 +993,1116 @@ class Dar extends Component {
           </Text>
           {/* </TouchableOpacity> */}
         </View>
-
-        <ScrollView style={{flexDirection: 'column', marginBottom: 20}}>
-          <View
-            style={{
-              marginHorizontal: 5,
-              // marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              // borderTopRightRadius: 12,
-              // borderTopLeftRadius: 12,
-              // borderBottomRightRadius: 12,
-              // borderBottomLeftRadius: 12,
-            }}>
-            <Text
+        {this.state.timetosave == 0 ? (
+          <ScrollView style={{flexDirection: 'column', marginBottom: 20}}>
+            <View
               style={{
-                textAlign: 'justify',
-                color: '#fff8fe',
-                fontSize: 18,
+                marginHorizontal: 5,
+                // marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                // borderTopRightRadius: 12,
+                // borderTopLeftRadius: 12,
+                // borderBottomRightRadius: 12,
+                // borderBottomLeftRadius: 12,
               }}>
-              Dihadapan anda terdapat soal-soal yang berbentuk gambar. Harap
-              diperhatikan, pada bagian atas adalah soal dan dibagian bawahnya
-              adalah pilihan jawaban. {'\n'}Contoh 1 : Bila gambar A dikecilkan,
-              maka akan diperoleh gambar B. Sekarang, apabila gambar C diakukan
-              hal yang serupa, jadi C dikecilkan, maka akan diperoleh
-              gambar….???? {'\n'}Gambar 2, maka cara menjawabnya silahkan
-              dilingkari gambar ke 2.
-            </Text>
-            <Image
-              style={{
-                //
-                width: '100%',
-                //height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/contohtiu.png')}
-            />
+              <CountDown
+                until={480}
+                onFinish={this.timetosubmitData}
+                onPress={() => alert('hello')}
+                size={40}
+              />
+            </View>
 
-            <Text> {this.state.timer} </Text>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 1
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu1.png')}
+              />
+              <RadioButtonRN
+                data={data1}
+                selectedBtn={e => this.setState({jwb1: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 2
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu2.png')}
+              />
+              <RadioButtonRN
+                data={data1}
+                selectedBtn={e => this.setState({jwb2: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 3
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu3.png')}
+              />
+              <RadioButtonRN
+                data={data3}
+                selectedBtn={e => this.setState({jwb3: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 4
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu4.png')}
+              />
+              <RadioButtonRN
+                data={data4}
+                selectedBtn={e => this.setState({jwb4: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 5
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu5.png')}
+              />
+              <RadioButtonRN
+                data={data5}
+                selectedBtn={e => this.setState({jwb5: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 6
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu6.png')}
+              />
+              <RadioButtonRN
+                data={data6}
+                selectedBtn={e => this.setState({jwb6: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 7
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu7.png')}
+              />
+              <RadioButtonRN
+                data={data7}
+                selectedBtn={e => this.setState({jwb7: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 8
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu8.png')}
+              />
+              <RadioButtonRN
+                data={data8}
+                selectedBtn={e => this.setState({jwb8: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 9
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu9.png')}
+              />
+              <RadioButtonRN
+                data={data9}
+                selectedBtn={e => this.setState({jwb9: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 10
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu10.png')}
+              />
+              <RadioButtonRN
+                data={data10}
+                selectedBtn={e => this.setState({jwb10: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 11
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu11.png')}
+              />
+              <RadioButtonRN
+                data={data11}
+                selectedBtn={e => this.setState({jwb11: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 12
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu12.png')}
+              />
+              <RadioButtonRN
+                data={data12}
+                selectedBtn={e => this.setState({jwb12: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 13
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu13.png')}
+              />
+              <RadioButtonRN
+                data={data13}
+                selectedBtn={e => this.setState({jwb13: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 14
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu14.png')}
+              />
+              <RadioButtonRN
+                data={data14}
+                selectedBtn={e => this.setState({jwb14: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 15
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu15.png')}
+              />
+              <RadioButtonRN
+                data={data15}
+                selectedBtn={e => this.setState({jwb15: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 16
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu16.png')}
+              />
+              <RadioButtonRN
+                data={data16}
+                selectedBtn={e => this.setState({jwb16: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 17
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu17.png')}
+              />
+              <RadioButtonRN
+                data={data17}
+                selectedBtn={e => this.setState({jwb17: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 18
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu18.png')}
+              />
+              <RadioButtonRN
+                data={data1}
+                selectedBtn={e => this.setState({jwb18: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 19
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu19.png')}
+              />
+              <RadioButtonRN
+                data={data19}
+                selectedBtn={e => this.setState({jwb19: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 20
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu20.png')}
+              />
+              <RadioButtonRN
+                data={data20}
+                selectedBtn={e => this.setState({jwb20: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 21
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu21.png')}
+              />
+              <RadioButtonRN
+                data={data21}
+                selectedBtn={e => this.setState({jwb21: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 22
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu22.png')}
+              />
+              <RadioButtonRN
+                data={data21}
+                selectedBtn={e => this.setState({jwb22: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 23
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu23.png')}
+              />
+              <RadioButtonRN
+                data={data23}
+                selectedBtn={e => this.setState({jwb23: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 24
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu24.png')}
+              />
+              <RadioButtonRN
+                data={data24}
+                selectedBtn={e => this.setState({jwb24: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 25
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu25.png')}
+              />
+              <RadioButtonRN
+                data={data25}
+                selectedBtn={e => this.setState({jwb25: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 26
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu26.png')}
+              />
+              <RadioButtonRN
+                data={data26}
+                selectedBtn={e => this.setState({jwb26: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 27
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu27.png')}
+              />
+              <RadioButtonRN
+                data={data27}
+                selectedBtn={e => this.setState({jwb27: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 28
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu28.png')}
+              />
+              <RadioButtonRN
+                data={data28}
+                selectedBtn={e => this.setState({jwb28: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 29
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu29.png')}
+              />
+              <RadioButtonRN
+                data={data29}
+                selectedBtn={e => this.setState({jwb29: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginBottom: 10,
+                marginTop: 5,
+                padding: 10,
+                backgroundColor: '#5b0b4b',
+                paddingVertical: 10,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                borderBottomRightRadius: 12,
+                borderBottomLeftRadius: 12,
+              }}>
+              <Text
+                style={{
+                  color: '#fff8fe',
+                  fontSize: 18,
+                }}>
+                Soal 30
+              </Text>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 100,
+                  // borderRadius: 25,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/tiu/tiu30.png')}
+              />
+              <RadioButtonRN
+                data={data30}
+                selectedBtn={e => this.setState({jwb30: e.value})}
+                icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
+              />
+            </View>
+
             <TouchableOpacity
               style={{
                 marginBottom: 40,
-                backgroundColor: '#ffe7fa',
+                backgroundColor: '#6d0e5a',
                 paddingVertical: 15,
                 marginHorizontal: 5,
                 justifyContent: 'center',
@@ -1052,1114 +2110,58 @@ class Dar extends Component {
                 borderRadius: 9,
                 elevation: 2,
               }}
-              onPress={this.getTimerCountDown}>
+              onPress={this.submitData}>
               <Text
-                style={{color: '#6d0e5a', fontSize: 18, fontWeight: 'light'}}>
-                MULAI
+                style={{color: '#FFFFFF', fontSize: 18, fontWeight: 'light'}}>
+                SIMPAN
               </Text>
             </TouchableOpacity>
-          </View>
-
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
+          </ScrollView>
+        ) : (
+          <ScrollView style={{flexDirection: 'column', marginBottom: 20}}>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 200,
+                  height: 200,
+                  // resizeMode: 'cover',
+                }}
+                source={require('../images/logo-griya.png')}
+              />
+            </View>
+            <View
               style={{
-                color: '#fff8fe',
-                fontSize: 18,
+                backgroundColor: '#7030a0',
+                padding: 25,
+                marginLeft: 5,
+                marginRight: 5,
+                marginBottom: 20,
               }}>
-              Soal 1
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu1.png')}
-            />
-            <RadioButtonRN
-              data={data1}
-              selectedBtn={e => this.setState({jwb1: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 2
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu2.png')}
-            />
-            <RadioButtonRN
-              data={data1}
-              selectedBtn={e => this.setState({jwb2: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 3
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu3.png')}
-            />
-            <RadioButtonRN
-              data={data3}
-              selectedBtn={e => this.setState({jwb3: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 4
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu4.png')}
-            />
-            <RadioButtonRN
-              data={data4}
-              selectedBtn={e => this.setState({jwb4: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 5
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu5.png')}
-            />
-            <RadioButtonRN
-              data={data5}
-              selectedBtn={e => this.setState({jwb5: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 6
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu6.png')}
-            />
-            <RadioButtonRN
-              data={data6}
-              selectedBtn={e => this.setState({jwb6: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 7
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu7.png')}
-            />
-            <RadioButtonRN
-              data={data7}
-              selectedBtn={e => this.setState({jwb7: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 8
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu8.png')}
-            />
-            <RadioButtonRN
-              data={data8}
-              selectedBtn={e => this.setState({jwb8: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 9
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu9.png')}
-            />
-            <RadioButtonRN
-              data={data9}
-              selectedBtn={e => this.setState({jwb9: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 10
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu10.png')}
-            />
-            <RadioButtonRN
-              data={data10}
-              selectedBtn={e => this.setState({jwb10: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 11
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu11.png')}
-            />
-            <RadioButtonRN
-              data={data11}
-              selectedBtn={e => this.setState({jwb11: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 12
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu12.png')}
-            />
-            <RadioButtonRN
-              data={data12}
-              selectedBtn={e => this.setState({jwb12: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 13
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu13.png')}
-            />
-            <RadioButtonRN
-              data={data13}
-              selectedBtn={e => this.setState({jwb13: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 14
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu14.png')}
-            />
-            <RadioButtonRN
-              data={data14}
-              selectedBtn={e => this.setState({jwb14: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 15
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu15.png')}
-            />
-            <RadioButtonRN
-              data={data15}
-              selectedBtn={e => this.setState({jwb15: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 16
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu16.png')}
-            />
-            <RadioButtonRN
-              data={data16}
-              selectedBtn={e => this.setState({jwb16: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 17
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu17.png')}
-            />
-            <RadioButtonRN
-              data={data17}
-              selectedBtn={e => this.setState({jwb17: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 18
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu18.png')}
-            />
-            <RadioButtonRN
-              data={data1}
-              selectedBtn={e => this.setState({jwb18: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 19
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu19.png')}
-            />
-            <RadioButtonRN
-              data={data19}
-              selectedBtn={e => this.setState({jwb19: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 20
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu20.png')}
-            />
-            <RadioButtonRN
-              data={data20}
-              selectedBtn={e => this.setState({jwb20: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 21
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu21.png')}
-            />
-            <RadioButtonRN
-              data={data21}
-              selectedBtn={e => this.setState({jwb21: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 22
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu22.png')}
-            />
-            <RadioButtonRN
-              data={data21}
-              selectedBtn={e => this.setState({jwb22: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 23
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu23.png')}
-            />
-            <RadioButtonRN
-              data={data23}
-              selectedBtn={e => this.setState({jwb23: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 24
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu24.png')}
-            />
-            <RadioButtonRN
-              data={data24}
-              selectedBtn={e => this.setState({jwb24: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 25
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu25.png')}
-            />
-            <RadioButtonRN
-              data={data25}
-              selectedBtn={e => this.setState({jwb25: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 26
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu26.png')}
-            />
-            <RadioButtonRN
-              data={data26}
-              selectedBtn={e => this.setState({jwb26: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 27
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu27.png')}
-            />
-            <RadioButtonRN
-              data={data27}
-              selectedBtn={e => this.setState({jwb27: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 28
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu28.png')}
-            />
-            <RadioButtonRN
-              data={data28}
-              selectedBtn={e => this.setState({jwb28: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 29
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu29.png')}
-            />
-            <RadioButtonRN
-              data={data29}
-              selectedBtn={e => this.setState({jwb29: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginBottom: 10,
-              marginTop: 5,
-              padding: 10,
-              backgroundColor: '#5b0b4b',
-              paddingVertical: 10,
-              borderTopRightRadius: 12,
-              borderTopLeftRadius: 12,
-              borderBottomRightRadius: 12,
-              borderBottomLeftRadius: 12,
-            }}>
-            <Text
-              style={{
-                color: '#fff8fe',
-                fontSize: 18,
-              }}>
-              Soal 30
-            </Text>
-
-            <Image
-              style={{
-                width: '100%',
-                height: 100,
-                // borderRadius: 25,
-                resizeMode: 'contain',
-              }}
-              source={require('../images/tiu/tiu30.png')}
-            />
-            <RadioButtonRN
-              data={data30}
-              selectedBtn={e => this.setState({jwb30: e.value})}
-              icon={<Icon name="check-circle" size={25} color="#2c9dd1" />}
-            />
-          </View>
-
-          <TouchableOpacity
-            style={{
-              marginBottom: 40,
-              backgroundColor: '#6d0e5a',
-              paddingVertical: 15,
-              marginHorizontal: 5,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 9,
-              elevation: 2,
-            }}
-            onPress={this.submitData}>
-            <Text style={{color: '#FFFFFF', fontSize: 18, fontWeight: 'light'}}>
-              SIMPAN
-            </Text>
-          </TouchableOpacity>
-        </ScrollView>
+              <Text>
+                Waktu Telah Habis, Silahkan tekan tombol simpan dibawah ini
+              </Text>
+            </View>
+            <View>
+              <TouchableOpacity
+                style={{
+                  marginBottom: 40,
+                  backgroundColor: '#6d0e5a',
+                  paddingVertical: 15,
+                  marginHorizontal: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 9,
+                  elevation: 2,
+                }}
+                onPress={this.submitData}>
+                <Text
+                  style={{color: '#FFFFFF', fontSize: 18, fontWeight: 'light'}}>
+                  SIMPAN
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        )}
 
         <View
           style={{
@@ -2186,7 +2188,7 @@ class Dar extends Component {
               Home
             </Text>
           </TouchableOpacity>
-          {/* DAR / TIU */}
+          {/* DAR */}
           <TouchableOpacity
             style={{
               flex: 1,
@@ -2194,7 +2196,7 @@ class Dar extends Component {
               alignItems: 'center',
             }}
             onPress={() =>
-              this.props.navigation.navigate('DrawerDar', {
+              this.props.navigation.navigate('DrawerIntrotiu', {
                 data: this.state.datalogin,
                 token: this.state.token,
               })
@@ -2208,7 +2210,7 @@ class Dar extends Component {
               TIU
             </Text>
           </TouchableOpacity>
-          {/* Laporan PAPI*/}
+          {/* Laporan */}
           <TouchableOpacity
             style={{
               flex: 1,
@@ -2231,7 +2233,7 @@ class Dar extends Component {
             </Text>
           </TouchableOpacity>
 
-          {/* Cuti RIASEC*/}
+          {/* Cuti */}
           <TouchableOpacity
             style={{
               flex: 1,

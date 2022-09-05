@@ -303,14 +303,14 @@ class Dar extends Component {
           console.log(responseprofile.data.data.user.id_karyawan);
           console.log(this.state.token);
 
-          if (responseprofile.data.periodetanggaldar.length === 0) {
-            console.log('periode tanggal dar kosong');
-            this.setState({tanggaldar: responseprofile.data.tglhariini});
-          } else {
-            this.setState({
-              tanggaldar: responseprofile.data.periodetanggaldar[0],
-            });
-          }
+          // if (responseprofile.data.periodetanggaldar.length === 0) {
+          //   console.log('periode tanggal dar kosong');
+          //   this.setState({tanggaldar: responseprofile.data.tglhariini});
+          // } else {
+          //   this.setState({
+          //     tanggaldar: responseprofile.data.periodetanggaldar[0],
+          //   });
+          // }
           this.setState({
             status: responseprofile.data.statusdar,
             periodetanggaldar: responseprofile.data.periodetanggaldar,
@@ -324,20 +324,20 @@ class Dar extends Component {
           console.log(iduser);
           console.log(this.state.tanggaldar);
           //ambild data di server bisa dilakukan disini
-          axios({
-            method: 'get',
-            url: `${baseUrl}/api/sidar_dar/detail?option=2&iduser=${iduser}`,
-            headers: {
-              'X-Api-Key': '0ED40DE05125623C8753B6D3196C18DE',
-              'X-Token': this.state.token,
-            },
-          })
-            .then(response => {
-              this.setState({dar: response.data.data.sidar_dar});
-            })
-            .catch(function (err) {
-              console.log(err);
-            });
+          // axios({
+          //   method: 'get',
+          //   url: `${baseUrl}/api/sidar_dar/detail?option=2&iduser=${iduser}`,
+          //   headers: {
+          //     'X-Api-Key': '0ED40DE05125623C8753B6D3196C18DE',
+          //     'X-Token': this.state.token,
+          //   },
+          // })
+          //   .then(response => {
+          //     this.setState({dar: response.data.data.sidar_dar});
+          //   })
+          //   .catch(function (err) {
+          //     console.log(err);
+          //   });
         })
         .catch(function (err) {
           console.log(err);
@@ -509,7 +509,7 @@ class Dar extends Component {
               padding: 1,
             }}
             onPress={() => this.props.navigation.toggleDrawer()}>
-            <Icon name="bars" size={30} color="#ffe7fa" />
+            <Icon name="bars" size={30} color="#" />
           </TouchableOpacity>
 
           <Text
@@ -546,7 +546,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -567,7 +567,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -588,7 +588,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -609,7 +609,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -630,7 +630,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -651,7 +651,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -672,7 +672,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -693,7 +693,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -714,7 +714,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -735,7 +735,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -756,7 +756,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -777,7 +777,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -798,7 +798,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -819,7 +819,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -840,7 +840,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -861,7 +861,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -882,7 +882,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -903,7 +903,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -924,7 +924,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -945,7 +945,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -966,7 +966,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -987,7 +987,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1008,7 +1008,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1029,7 +1029,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1050,7 +1050,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1071,7 +1071,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1092,7 +1092,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1113,7 +1113,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1134,7 +1134,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1155,7 +1155,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1176,7 +1176,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1197,7 +1197,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1218,7 +1218,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1239,7 +1239,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1260,7 +1260,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1281,7 +1281,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1302,7 +1302,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1323,7 +1323,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1344,7 +1344,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1365,7 +1365,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1386,7 +1386,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,
@@ -1407,7 +1407,7 @@ class Dar extends Component {
               marginBottom: 10,
               marginTop: 5,
               padding: 10,
-              backgroundColor: '#ff8ee8',
+              backgroundColor: '#6d0e5a',
               paddingVertical: 10,
               borderTopRightRadius: 12,
               borderTopLeftRadius: 12,

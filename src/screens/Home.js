@@ -312,7 +312,7 @@ class Home extends Component {
                     textAlign: 'center',
                     padding: 5,
                   }}>
-                  GRIYA PSIKOLOGI {'\n'} Psichological & Counseling Center
+                  GRIYA PSIKOLOGI {'\n'} Psychological & Counseling Center
                 </Text>
                 <Text
                   style={{
@@ -639,7 +639,7 @@ class Home extends Component {
                   alignItems: 'center',
                 }}
                 onPress={() =>
-                  this.props.navigation.navigate('DrawerDar', {
+                  this.props.navigation.navigate('DrawerIntrotiu', {
                     data: this.state.datalogin,
                     token: this.state.token,
                   })
